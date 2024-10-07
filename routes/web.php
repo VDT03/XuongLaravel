@@ -47,4 +47,4 @@ Route::get('dashboard', function () {
     return view('dashboard');
 })->name('dashboard')->middleware('checkauth');
 
-Route::get('logout', [LogoutController::class, 'logout']);
+Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
