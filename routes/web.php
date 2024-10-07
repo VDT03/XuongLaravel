@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Middleware\AgeMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,9 +27,24 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+
+
 // Bài 1 middleware
 Route::middleware([AgeMiddleware::class])->group(function(){
     Route::get('movies', function (){
         return view('movie');
     });
 });
+
+// Bài 3 Authentication
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
+
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+
+Route::get('dashboard', function () {
+    return view('dashboard');
+})->name('dashboard')->middleware('checkauth');
+
+Route::get('logout', [LogoutController::class, 'logout']);
