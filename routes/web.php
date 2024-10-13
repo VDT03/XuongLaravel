@@ -5,6 +5,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\StudentController;
 use App\Http\Middleware\AgeMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ Route::delete('employees/{employee}/forceDestroy', [EmployeeController::class, '
 ->name('employees.forceDestroy');
 
 
+// Laravel UI
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -35,7 +37,6 @@ Route::middleware([AgeMiddleware::class])->group(function(){
         return view('movie');
     });
 });
-
 // Bài 3 Authentication
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register']);
@@ -48,3 +49,11 @@ Route::get('dashboard', function () {
 })->name('dashboard')->middleware('checkauth');
 
 Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
+
+
+
+
+
+
+// Bài tập buổi 6 về mối quan hệ Eloquent
+Route::resource('students', StudentController::class);
