@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +31,14 @@ Route::middleware('auth:sanctum')
         Route::post('logout', [AuthController::class, 'logout']);
     });
 
-    
 Route::apiResource('customers', CustomerController::class);
+
+
+
+
+// Bài tập buổi 5 về api
+Route::apiResource('projects', ProjectController::class);
+
+Route::prefix('projects/{project}')->group(function () {
+    Route::apiResource('tasks', TaskController::class);
+});

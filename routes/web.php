@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\AgeMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,13 @@ Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
 
 
 
+// Bài tập buổi 5 về session
+Route::get('index', [TransactionController::class, 'index'])->name('index');
+Route::get('create-trans', [TransactionController::class, 'create'])->name('transcreate');
+Route::post('store-trans', [TransactionController::class, 'store'])->name('transstore');
+Route::get('inf-trans', [TransactionController::class, 'infor'])->name('transinfor');
+Route::post('confirm-trans', [TransactionController::class, 'confirm'])->name('transconfirm');
+Route::get('forget', [TransactionController::class, 'forget'])->name('forget');
 
 
 
